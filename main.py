@@ -82,12 +82,12 @@ st.session_state.current_page = choice
 if st.session_state.failed_attempts >= 3:
     # Force redirect to login page
     st.session_state.current_page = "Login"
-    st.warning("🔒 Too many failed attempts! Reauthorization required.")
+    st.warning("🔒 You've reached the limit for failed attempts. Please verify again..")
 
 # Display current page
 if st.session_state.current_page == "Home":
     st.subheader("🏠 Welcome ")
-    st.write("Use this app to **securely store and retrieve data** using unique passkeys.")
+    st.write("Keep your data safe—store and retrieve it using personalized passkeys..")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -109,7 +109,7 @@ elif st.session_state.current_page == "Store Data":
     if st.button("Encrypt & Save"):
         if user_data and passkey and confirm_passkey:
             if passkey != confirm_passkey:
-                st.error("⚠️ Passkeys do not match!")
+                st.error("⚠️ Oops! The passkeys don’t align.")
             else:
                 # Generate a unique ID for this data
                 data_id = generate_data_id()
@@ -130,7 +130,7 @@ elif st.session_state.current_page == "Store Data":
                 
                 # Display the data ID for retrieval
                 st.code(data_id, language="text")
-                st.info("⚠️ Save this Data ID! You'll need it to retrieve your data.")
+                st.info("⚠️ Make sure to save this Data ID! You'll need it to access your data later.")
         else:
             st.error("⚠️ All fields are required!")
 
@@ -161,7 +161,7 @@ elif st.session_state.current_page == "Retrieve Data":
                 
             # Check if too many failed attempts after this attempt
             if st.session_state.failed_attempts >= 3:
-                st.warning("🔒 Too many failed attempts! Redirecting to Login Page.")
+                st.warning("🔒 You've reached the max number of failed attempts! Redirecting to the Login Page")
                 st.session_state.current_page = "Login"
                 st.rerun()  # Updated from experimental_rerun()
         else:
