@@ -86,7 +86,7 @@ if st.session_state.failed_attempts >= 3:
 
 # Display current page
 if st.session_state.current_page == "Home":
-    st.subheader("🏠 Welcome to the Secure Data System")
+    st.subheader("🏠 Welcome ")
     st.write("Use this app to **securely store and retrieve data** using unique passkeys.")
     
     col1, col2 = st.columns(2)
